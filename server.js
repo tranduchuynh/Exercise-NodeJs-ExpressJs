@@ -5,8 +5,12 @@
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
 
+const adapter = new FileSync("db.json");
+const db = low(adapter);
 
 app.set("view engine", "/views");
 app.set("view engine", "pug");
@@ -14,12 +18,7 @@ app.set("view engine", "pug");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const todos = [
-  { id: 1, todo: "Đi chợ" },
-  { id: 2, todo: "Nấu cơm" },
-  { id: 3, todo: "Rửa bát" },
-  { id: 4, todo: "Học tại CodersX" }
-];
+db.defaults({ todos: [] }).write();
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (req, res) => {
@@ -30,29 +29,32 @@ app.get("/", (req, res) => {
 
 app.get("/todos", (req, res) => {
   const q = req.query.q;
-  if(!q){
+  if (!q) {
     res.render("todos/index", {
-    todos
-  });
-  }else {
-    let matchTodos = todos.filter(todo => 
-     todo.todo.toLowerCase().indexOf(q.toLowerCase()) !== -1
-  );
+      todos: db.get("todos").value()
+    });
+  } else {
+    let matchTodos = db
+      .get("todos")
+      .value()
+      .filter(todo => todo.todo.toLowerCase().indexOf(q.toLowerCase()) !== -1);
 
-  res.render("todos/index", {
-    todos: matchTodos
-  });
+    res.render("todos/index", {
+      todos: matchTodos
+    });
   }
 });
 
 app.get("/todos/create", (req, res) => {
-  res.render("todos/create")
-})
+  res.render("todos/create");
+});
 
 app.post("/todos/create", (req, res) => {
-  todos.push(req.body)
-  res.redirect("/todos")
-})
+  db.get("todos")
+    .push(req.body)
+    .write();
+  res.redirect("/todos");
+});
 
 // listen for requests :)
 app.listen(process.env.PORT, () => {
