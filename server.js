@@ -8,6 +8,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
+const shortid = require("shortid");
 
 const adapter = new FileSync("db.json");
 const db = low(adapter);
@@ -34,7 +35,7 @@ app.get("/todos", (req, res) => {
       todos: db.get("todos").value()
     });
   } else {
-    let matchTodos = db
+    const matchTodos = db
       .get("todos")
       .value()
       .filter(todo => todo.todo.toLowerCase().indexOf(q.toLowerCase()) !== -1);
@@ -50,10 +51,37 @@ app.get("/todos/create", (req, res) => {
 });
 
 app.post("/todos/create", (req, res) => {
+  req.body.id = shortid.generate();
   db.get("todos")
     .push(req.body)
     .write();
   res.redirect("/todos");
+});
+
+app.get("/todos/:id", (req, res) => {
+  const id = req.params.id;
+  const name = db
+    .get("todos")
+    .find({ id })
+    .value();
+  res.render("todos/view", {
+    name
+  });
+});
+
+app.get("/todos/:id/delete", (req, res) => {
+  console.log(req.params);
+  const id = req.params.id;
+  const name = db
+    .get("todos")
+    .find({ id })
+    .value();
+  if (name) {
+    db.get("todos").remove({ todo: name.todo }).write();
+    res.render("todos/index", {
+      todos: db.get("todos").value()
+    });
+  }
 });
 
 // listen for requests :)

@@ -1,11 +1,3 @@
 {
-  "todos": [
-    {
-      "id": 1,
-      "todo": "blah"
-    },
-    {
-      "todo": "Hang out with my girl"
-    }
-  ]
+  "todos": []
 }

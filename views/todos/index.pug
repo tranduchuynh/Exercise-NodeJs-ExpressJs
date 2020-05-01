@@ -7,3 +7,10 @@ form(action="/todos" method="GET")
 ul
   each todo in todos
     li= todo.todo
+      span &nbsp
+      span
+        a(href="/todos/" + todo.id) View
+      span  / 
+      span
+        a(href="/todos/" + todo.id + "/delete") Delete
+        
