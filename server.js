@@ -6,9 +6,15 @@
 const express = require("express");
 const app = express();
 
-
 app.set("view engine", "/views");
 app.set("view engine", "pug");
+
+const todos = [
+  { id: 1, name: "Đi chợ" },
+  { id: 2, name: "Nấu cơm" },
+  { id: 3, name: "Rửa bát" },
+  { id: 4, name: "Học tại CodersX" }
+];
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (req, res) => {
@@ -18,13 +24,18 @@ app.get("/", (req, res) => {
 });
 
 app.get("/todos", (req, res) => {
+  const q = req.query.q;
+  if(!q){
+    res.render("todos/index", {
+    todos
+  });
+  }
+  let matchTodos = todos.filter(todo => 
+     todo.name.toLowerCase().indexOf(q.toLowerCase()) !== -1
+  );
+
   res.render("todos/index", {
-    todos: [
-      { id: 1, name: "Đi chợ" },
-      { id: 2, name: "Nấu cơm" },
-      { id: 3, name: "Rửa bát" },
-      { id: 4, name: "Học tại CodersX" }
-    ]
+    todos: matchTodos
   });
 });
 
