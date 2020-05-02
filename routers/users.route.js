@@ -5,31 +5,31 @@ const shortid = require("shortid");
 const db = require("../db");
 
 router.get("/", (req, res) => {
-  res.render("books/index", {
-    books: db.get("books").value()
+  res.render("users/index", {
+    users: db.get("users").value()
   });
 });
 
 router.get("/search", (req, res) => {
   const q = req.query.q;
   const bookName = db
-    .get("books")
+    .get("users")
     .value()
     .filter(book => {
       return book.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
     });
-  res.render("books/index", {
-    books: bookName
+  res.render("users/index", {
+    users: bookName
   });
 });
 
 router.get("/create", (req, res) => {
-  res.render("books/create");
+  res.render("users/create");
 });
 
 router.post("/create", (req, res) => {
   req.body.id = shortid.generate();
-  db.get("books")
+  db.get("users")
     .push(req.body)
     .write();
   res.redirect("/users");
@@ -38,52 +38,51 @@ router.post("/create", (req, res) => {
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   const name = db
-    .get("books")
+    .get("users")
     .find({ id })
     .value();
-  res.render("books/view", {
+  res.render("users/view", {
     name
   });
 });
 
 router.get("/edit/:id", (req, res) => {
   const id = req.params.id;
-  const book = db
-    .get("books")
+  const user = db
+    .get("users")
     .find({ id })
     .value();
-  res.render("books/edit", {
-    book
+  res.render("users/edit", {
+    user
   });
 });
 
 router.get("/delete/:id", (req, res) => {
   const id = req.params.id;
-  const book = db
-    .get("books")
+  const user = db
+    .get("users")
     .find({ id })
     .value();
-  if (book) {
-    db.get("books")
-      .remove({ name: book.name })
+  if (user) {
+    db.get("users")
+      .remove({ id: user.id })
       .write();
-    res.render("books/index", {
-      books: db.get("books").value()
+    res.render("users/index", {
+      users: db.get("users").value()
     });
   }
 });
 
 router.post("/edit/:id", (req, res) => {
   const id = req.params.id;
-  const book = db
-    .get("books")
+  const user = db
+    .get("users")
     .find({ id })
     .assign({
       name: req.body.name,
       description: req.body.description
     })
     .write();
-  console.log("books", book);
   res.redirect("/users");
 });
 

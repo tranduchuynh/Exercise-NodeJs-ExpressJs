@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 
 const usersRouter = require("./routers/users.route");
+const transRouter = require("./routers/transactions.route");
 
 app.use(express.static("public"));
 
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", usersRouter);
+app.use("/trans", transRouter);
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {

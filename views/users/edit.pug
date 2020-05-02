@@ -1,10 +1,10 @@
 h1 Edit Books
-form(action=`/users/edit/${book.id}` method="POST")
+form(action=`/users/edit/${user.id}` method="POST")
   div(style="margin-bottom: 10px")
     label(style="display: block") Name:
-    input(name="name" type="text" value=`${book.name}`) 
+    input(name="name" type="text" value=`${user.name}`) 
   div(style="margin-bottom: 10px")
     label(style="display: block") Description:
-    input(name="description" type="text" value=`${book.description}`) 
+    input(name="description" type="text" value=`${user.description}`) 
   div
     button Edit
