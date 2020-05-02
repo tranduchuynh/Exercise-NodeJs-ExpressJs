@@ -9,10 +9,4 @@ ul(style="padding-left: 0")
     li= `${tran.formTrans[0]} have rented book ${tran.formTrans[1]}`
       span &nbsp
       span
-        a(href="/trans/" + tran.id) View
-      span  / 
-      span
-        a(href="/trans/delete/" + tran.id) Delete
-      span  / 
-      span
-        a(href="/trans/edit/" + tran.id) Edit
+        a(href="/trans/complete" + tran.id) Compeleted
