@@ -14,13 +14,11 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.postCreate = (req, res) => {
-  const userId = db
-    .get("users")
-    .find({ id: req.params.id })
-    .value();
+  console.log(req.body)
   req.body.id = shortid.generate();
-  req.body.userId = userId.id;
+  req.body.userId = shortid.generate();
   req.body.bookId = shortid.generate();
+  req.body.isComplete = false;
   const trans = db
     .get("trans")
     .push(req.body)
@@ -28,3 +26,42 @@ module.exports.postCreate = (req, res) => {
   res.redirect("/trans");
 };
 
+module.exports.complete = (req, res) => {
+  const id = req.params.id;
+  db.get("trans")
+    .find({ id })
+    .assign({ isComplete: true })
+    .write();
+  res.render("trans/index", {
+    trans: db.get("trans").value()
+  });
+};
+
+module.exports.delete = (req, res) => {
+  const id = req.params.id;
+  db.get("trans")
+    .remove({ id })
+    .write();
+  res.render("trans/index", {
+    trans: db.get("trans").value()
+  });
+};
+
+module.exports.search = (req, res) => {
+  const q = req.query.q;
+  console.log(q);
+  const transSearch = db
+    .get("trans")
+    .value()
+    .filter(tran => {
+      return tran.formTrans[0].toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    });
+
+  if (!transSearch) {
+    transSearch = "";
+  }
+
+  res.render("trans/index", {
+    trans: transSearch
+  });
+};

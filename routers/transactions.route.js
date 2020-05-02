@@ -6,6 +6,12 @@ router.get("/", controllers.index);
 
 router.get("/create", controllers.create);
 
-router.post("/create/:id", controllers.postCreate);
+router.post("/create", controllers.postCreate);
+
+router.get("/complete/:id", controllers.complete);
+
+router.get("/delete/:id", controllers.delete);
+
+router.get("/search", controllers.search);
 
 module.exports = router;

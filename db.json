@@ -1,17 +1,14 @@
 {
-  "todos": [],
-  "b": [],
-  "books": [],
-  "transaction": [],
   "trans": [
     {
       "formTrans": [
         "huynh",
-        "You don't know js"
+        "Nhà giả kim"
       ],
-      "id": "6uFvnCwFX",
-      "userId": "Ivc0y7s_I",
-      "bookId": "YcoJg3fsUb"
+      "id": "YP9PWPuct",
+      "userId": "XX8a9UzLmm",
+      "bookId": "h1h2xctUHK",
+      "isComplete": false
     }
   ],
   "users": [
@@ -19,6 +16,11 @@
       "name": "huynh",
       "description": "fdsf",
       "id": "Ivc0y7s_I"
+    },
+    {
+      "name": "Huong",
+      "description": "Pro",
+      "id": "GLFbbPsXU"
     }
   ]
 }

@@ -1,7 +1,7 @@
 h1 Transactions
 h3
   a(href="/trans/create") Create new trans book
-form(action="/trans/search", method="POST")
+form(action="/trans/search", method="GET")
   input(name="q" type="text")
   button Search
 ul(style="padding-left: 0")
@@ -9,4 +9,11 @@ ul(style="padding-left: 0")
     li= `${tran.formTrans[0]} have rented book ${tran.formTrans[1]}`
       span &nbsp
       span
-        a(href="/trans/complete" + tran.id) Compeleted
+        if(!tran.isComplete)
+          a(href="/trans/complete/" + tran.id) - Not complete
+        else
+          span - Completed
+      span  / 
+      span
+        a(href="/trans/delete/" + tran.id) Delete
+      
