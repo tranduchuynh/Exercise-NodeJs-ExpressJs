@@ -1,0 +1,18 @@
+h1 Books App
+h3
+  a(href="/books/create") New Book
+form(action="/books/search", method="POST")
+  input(name="q" type="text")
+  button Search
+ul
+  each book in books
+    li= book.name
+      span &nbsp
+      span
+        a(href="/books/" + book.id) View
+      span  / 
+      span
+        a(href="/books/delete/" + book.id) Delete
+      span  / 
+      span
+        a(href="/books/edit/" + book.id) Edit
