@@ -1,14 +1,17 @@
-h1(style="text-align: center") Create new trans book
+extends ../layout/common
 
-div(style="display: flex; justify-content: space-around")
-  div
-    select(form="formTrans" name="formTrans")
-      each user in users  
-        option(value=`${user.name}`) #{user.name}
-  div
-    select(form="formTrans" name="formTrans")
-      option(value="Nhà giả kim") Nha gia kim
-      option(value="You don't know js") You don't know js
-      option(valur="97 Things Every Programmer Should Know") 97 Things Every...
-form(action="/trans/create", method="POST" id="formTrans" style="text-align: center; margin: 20px 0px 0px -50px")
-  button Create
+block content
+  h1.text-center Create new transaction
+
+  div.d-flex.justify-content-around.mt-4
+    div
+      select(form="formTrans" name="formTrans")
+        each user in users  
+          option(value=`${user.name}`) #{user.name}
+    div
+      select(form="formTrans" name="formTrans")
+        option(value="Nhà giả kim") Nha gia kim
+        option(value="You don't know js") You don't know js
+        option(valur="97 Things Every Programmer Should Know") 97 Things Every...
+  form(action="/trans/create", method="POST" id="formTrans" style="text-align: center; margin: 20px 0px 0px -50px")
+    button.btn.btn-primary.mt-5 Create

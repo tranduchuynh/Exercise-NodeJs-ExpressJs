@@ -1,19 +1,27 @@
-h1 Transactions
-h3
-  a(href="/trans/create") Create new trans book
-form(action="/trans/search", method="GET")
-  input(name="q" type="text")
-  button Search
-ul(style="padding-left: 0")
-  each tran in trans
-    li= `${tran.formTrans[0]} have rented book ${tran.formTrans[1]}`
-      span &nbsp
-      span
-        if(!tran.isComplete)
-          a(href="/trans/complete/" + tran.id) - Not complete
-        else
-          span - Completed
-      span  / 
-      span
-        a(href="/trans/delete/" + tran.id) Delete
-      
+extends ../layout/common
+
+block content
+  h1.text-center Transactions
+  h3.text-center
+    a(href="/trans/create") New trans
+  form(action="/trans/search", method="GET").text-center
+    input(name="q" type="text").form-control.w-50.mx-auto
+    button.btn.btn-primary.mt-4 Search
+  table.table.table-dark.table-bordered.text-center
+    thead
+      tr
+        th Infomation
+        th Options
+    tbody
+      each tran in trans
+        tr
+          td=`${tran.formTrans[0]} have rented book ${tran.formTrans[1]}`
+          td
+             span
+              if(!tran.isComplete)
+                a(href="/trans/complete/" + tran.id) Not complete
+              else
+                span Completed
+              span  / 
+              span
+                a(href="/trans/delete/" + tran.id) Delete
