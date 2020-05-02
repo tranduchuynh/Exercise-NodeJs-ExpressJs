@@ -1,7 +1,7 @@
 h1 Books App
 h3
-  a(href="/books/create") New Book
-form(action="/books/search", method="POST")
+  a(href="/users/create") New Book
+form(action="/users/search", method="GET")
   input(name="q" type="text")
   button Search
 ul
@@ -9,10 +9,10 @@ ul
     li= book.name
       span &nbsp
       span
-        a(href="/books/" + book.id) View
+        a(href="/users/" + book.id) View
       span  / 
       span
-        a(href="/books/delete/" + book.id) Delete
+        a(href="/users/delete/" + book.id) Delete
       span  / 
       span
-        a(href="/books/edit/" + book.id) Edit
+        a(href="/users/edit/" + book.id) Edit
