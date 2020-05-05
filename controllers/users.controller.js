@@ -66,7 +66,7 @@ module.exports.delete = (req, res) => {
   }
 };
 
-module.exports.postCreate = (req, res) => {
+module.exports.postEdit = (req, res) => {
   const id = req.params.id;
   const user = db
     .get("users")

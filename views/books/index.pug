@@ -1,0 +1,30 @@
+extends ../layout/common
+
+block content
+  h1.text-center Books App
+  h3.text-center
+    a(href="/books/create") New Book
+  form(action="/books/search", method="GET").text-center
+    input(name="q" type="text").form-control.w-50.mx-auto
+    button.btn.btn-primary.mt-4 Search
+  table.table.table-dark.table-bordered.text-center.mx-auto(style="width: 50%;")
+    thead
+      tr
+        th ID
+        th Books
+        th Options
+    tbody
+      each book in books
+        tr
+          td=book.id
+          td=book.title
+          td
+            span
+              a(href="/books/" + book.id) View
+            span  / 
+            span
+              a(href="/books/" + book.id + "/edit") Edit
+            span  / 
+            span
+              a(href="/books/" + book.id + "/delete") Delete
+            

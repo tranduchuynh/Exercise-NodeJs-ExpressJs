@@ -9,15 +9,25 @@ module.exports.index = (req, res) => {
 
 module.exports.create = (req, res) => {
   res.render("trans/create", {
-    users: db.get("users").value()
+    users: db.get("users").value(),
+    books: db.get("books").value()
   });
 };
 
 module.exports.postCreate = (req, res) => {
-  console.log(req.body)
+  const name = req.body.formTrans[0];
+  const title = req.body.formTrans[1];
+  const userId = db
+    .get("users")
+    .find({ name })
+    .value();
+  const bookId = db
+    .get("books")
+    .find({ title })
+    .value();
   req.body.id = shortid.generate();
-  req.body.userId = shortid.generate();
-  req.body.bookId = shortid.generate();
+  req.body.userId = userId.id;
+  req.body.bookId = bookId.id;
   req.body.isComplete = false;
   const trans = db
     .get("trans")

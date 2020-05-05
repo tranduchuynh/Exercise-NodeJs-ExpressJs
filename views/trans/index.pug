@@ -7,7 +7,7 @@ block content
   form(action="/trans/search", method="GET").text-center
     input(name="q" type="text").form-control.w-50.mx-auto
     button.btn.btn-primary.mt-4 Search
-  table.table.table-dark.table-bordered.text-center
+  table.table.table-dark.table-bordered.text-center.mx-auto(style="width: 50%")
     thead
       tr
         th Infomation
@@ -15,7 +15,7 @@ block content
     tbody
       each tran in trans
         tr
-          td=`${tran.formTrans[0]} have rented book ${tran.formTrans[1]}`
+          td=`${tran.formTrans[0]} has hired the book ${tran.formTrans[1]}`
           td
              span
               if(!tran.isComplete)
