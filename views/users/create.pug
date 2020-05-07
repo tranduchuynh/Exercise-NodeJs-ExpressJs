@@ -2,12 +2,15 @@ extends ../layout/common
 
 block content
   h1.text-center Create User
+  if errors
+    each error in errors
+      .alert.alert-danger= error
   form(action="/users/create" method="POST").text-center
     div(style="margin-bottom: 10px")
       label(style="display: block") Name:
-      input(name="name" type="text").form-control.w-50.mx-auto
+      input(name="name" type="text" value=values ? values.name : "").form-control.w-50.mx-auto
     div(style="margin-bottom: 10px")
       label(style="display: block") Phone:
-      input(name="phone" type="text").form-control.w-50.mx-auto
+      input(name="phone" type="text" value=values ? values.phone : "").form-control.w-50.mx-auto
     div
       button.btn.btn-primary Create
