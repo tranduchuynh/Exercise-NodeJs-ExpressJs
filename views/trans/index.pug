@@ -7,6 +7,8 @@ block content
   form(action="/trans/search", method="GET").text-center
     input(name="q" type="text").form-control.w-50.mx-auto
     button.btn.btn-primary.mt-4 Search
+  if error
+    .alert.alert-danger= #{error}
   table.table.table-dark.table-bordered.text-center.mx-auto(style="width: 50%")
     thead
       tr

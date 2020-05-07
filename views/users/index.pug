@@ -12,12 +12,14 @@ block content
       tr
         th ID
         th Users
+        th Phone
         th Options
     tbody
       each user in users
         tr
           td=user.id
           td=user.name
+          td=user.phone
           td
             span
               a(href="/users/" + user.id) View

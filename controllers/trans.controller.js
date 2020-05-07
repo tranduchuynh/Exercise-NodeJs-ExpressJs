@@ -38,10 +38,14 @@ module.exports.postCreate = (req, res) => {
 
 module.exports.complete = (req, res) => {
   const id = req.params.id;
-  db.get("trans")
-    .find({ id })
-    .assign({ isComplete: true })
-    .write();
+  const tran = db.get("trans").find({ id }).value();
+  
+  if(!tran){
+    res.render("trans/index", {
+      error: "Not found trans"
+    })
+  }
+  db.get("trans").find({ id }).assign({ isComplete: true }).write();
   res.render("trans/index", {
     trans: db.get("trans").value()
   });

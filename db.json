@@ -1,21 +1,10 @@
 {
-  "trans": [
-    {
-      "formTrans": [
-        "Huynh Tran",
-        "Nhà giả kim"
-      ],
-      "id": "dIItpwHJZ",
-      "userId": "Ivc0y7s_I",
-      "bookId": "B9GVbVXXk",
-      "isComplete": false
-    }
-  ],
+  "trans": [],
   "users": [
     {
-      "name": "Huynh Tran",
-      "description": "Handsome",
-      "id": "Ivc0y7s_I"
+      "name": "huynh",
+      "phone": "0989899999",
+      "id": "x48x6hUTL"
     }
   ],
   "books": [

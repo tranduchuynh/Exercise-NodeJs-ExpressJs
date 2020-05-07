@@ -73,7 +73,7 @@ module.exports.postEdit = (req, res) => {
     .find({ id })
     .assign({
       name: req.body.name,
-      description: req.body.description
+      phone: req.body.phone
     })
     .write();
   res.redirect("/users");
