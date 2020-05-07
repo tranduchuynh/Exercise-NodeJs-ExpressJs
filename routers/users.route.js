@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const controllers = require("../controllers/users.controller");
+const validates = require("../validates/user.validate");
+
 
 router.get("/", controllers.index);
 
@@ -11,7 +13,7 @@ router.get("/create", (req, res) => {
   res.render("users/create");
 });
 
-router.post("/create", controllers.create);
+router.post("/create", validates.postCreate, controllers.postCreate);
 
 router.get("/:id", controllers.getId);
 
