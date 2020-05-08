@@ -1,7 +1,13 @@
 const shortid = require("shortid");
 const db = require("../db");
 
+let count = 0;
 module.exports.index = (req, res) => {
+  if(req.cookies){
+    count++;
+    console.log("cookie: " + count);
+  }
+  
   res.render("users/index", {
     users: db.get("users").value()
   });
