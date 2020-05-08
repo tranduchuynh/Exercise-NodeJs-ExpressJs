@@ -8,17 +8,19 @@ block content
     input(name="q" type="text").form-control.w-50.mx-auto
     button.btn.btn-primary.mt-4 Search
   if error
-    .alert.alert-danger= #{error}
+    .alert.alert-danger= error
   table.table.table-dark.table-bordered.text-center.mx-auto(style="width: 50%")
     thead
       tr
         th Infomation
-        th Options
+        if(user.isAdmin)
+          th Options
     tbody
       each tran in trans
         tr
           td=`${tran.formTrans[0]} has hired the book ${tran.formTrans[1]}`
-          td
+          if(user.isAdmin)  
+            td
              span
               if(!tran.isComplete)
                 a(href="/trans/complete/" + tran.id) Not complete

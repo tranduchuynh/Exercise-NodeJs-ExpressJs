@@ -3,11 +3,11 @@ const db = require("../db");
 
 let count = 0;
 module.exports.index = (req, res) => {
-  if(req.cookies){
+  if (req.cookies) {
     count++;
     console.log("cookie: " + count);
   }
-  
+
   res.render("users/index", {
     users: db.get("users").value()
   });
@@ -28,7 +28,7 @@ module.exports.search = (req, res) => {
 
 module.exports.postCreate = (req, res) => {
   req.body.id = shortid.generate();
-  
+
   db.get("users")
     .push(req.body)
     .write();

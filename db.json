@@ -1,10 +1,41 @@
 {
-  "trans": [],
+  "trans": [
+    {
+      "formTrans": [
+        "huynh",
+        "Nhà giả kim"
+      ],
+      "id": "m15beJR3u",
+      "userId": "x48x6hUTL",
+      "bookId": "B9GVbVXXk",
+      "isComplete": false
+    },
+    {
+      "formTrans": [
+        "ha",
+        "Nhà giả kim"
+      ],
+      "id": "ZzJuZHUFX",
+      "userId": "x48V9hUHA",
+      "bookId": "B9GVbVXXk",
+      "isComplete": false
+    }
+  ],
   "users": [
     {
       "name": "huynh",
       "phone": "0989899999",
-      "id": "x48x6hUTL"
+      "id": "x48x6hUTL",
+      "email": "huynhpro@gmail.com",
+      "password": "123123",
+      "isAdmin": true
+    },
+    {
+      "name": "ha",
+      "phone": "0989898767",
+      "id": "x48V9hUHA",
+      "email": "hacute@gmail.com",
+      "password": "123123"
     }
   ],
   "books": [

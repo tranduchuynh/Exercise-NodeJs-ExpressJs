@@ -2,8 +2,12 @@ const shortid = require("shortid");
 const db = require("../db");
 
 module.exports.index = (req, res) => {
+  const id = req.cookies.userId;
+  const user = db.get("users").find({ id }).value();
+  const trans = db.get("trans").value()
   res.render("trans/index", {
-    trans: db.get("trans").value()
+    trans: db.get("trans").value(),
+    user
   });
 };
 
