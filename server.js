@@ -1,8 +1,8 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
-
 
 const usersRouter = require("./routers/users.route");
 const transRouter = require("./routers/transactions.route");
@@ -19,7 +19,7 @@ app.set("view engine", "pug");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser("Iamwebdeveloper"));
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 
 app.get("/", (req, res) => {

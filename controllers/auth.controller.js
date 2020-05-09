@@ -1,18 +1,23 @@
 // const md5 = require("md5");
 const bcrypt = require("bcrypt");
 const db = require("../db");
-
+const sendAlertLoginEmail = require("../emails/account");
 
 module.exports.login = (req, res) => {
   res.render("auth/login");
 }
-let wrongLoginCount = 0;
+let wrongLoginCount = 1;
 
 module.exports.postLogin = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   
   const user = db.get("users").find({ email }).value();
+  console.log(wrongLoginCount);
+  
+  if(wrongLoginCount >= 3){
+    sendAlertLoginEmail(user.email, user.name, wrongLoginCount);
+  }
   
   if(!user) {
     wrongLoginCount++;

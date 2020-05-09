@@ -2,11 +2,11 @@ extends ../layout/common
 
 block content
   h1.text-center Login
-  if errors && loginCount < 4
+  if errors && loginCount <= 3
     each error in errors
       .alert.alert-danger= error
-  else if errors && loginCount >= 4
-    .alert.alert-danger= `You have entered the wrong account or password more than ${loginCount} times`
+  else if errors && loginCount > 3
+    .alert.alert-danger= `You have entered the wrong account or password more than ${loginCount - 1} times`
   form(action="/auth/login" method="POST").text-center
     div(style="margin-bottom: 10px")
       label(style="display: block") Email:
