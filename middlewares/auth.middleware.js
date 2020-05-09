@@ -7,7 +7,7 @@ module.exports.requireAuth = (req, res, next) => {
     res.render("auth/login");
     return;
   }
-  
+    
   const user = db.get("users").find({ id }).value();
     
   if(!user) {

@@ -1,11 +1,14 @@
+const md5 = require("md5");
 const db = require("../db");
+
 
 module.exports.login = (req, res) => {
   res.render("auth/login");
 }
 
 module.exports.postLogin = (req, res, next) => {
-  const email = req.body.email
+  const email = req.body.email;
+  const password = req.body.password;
   
   const user = db.get("users").find({ email }).value();
   
@@ -19,7 +22,10 @@ module.exports.postLogin = (req, res, next) => {
     return;
   }
   
-  if(user.password !== req.body.password) {
+  const hardPassword = md5(password);
+  console.log("ps", hardPassword);
+  
+  if(user.password !== hardPassword) {
     res.render("auth/login", {
       errors: [
         "Wrong password!"
