@@ -1,7 +1,7 @@
 const db = require("../db");
 
 module.exports.requireAuth = (req, res, next) => {
-  const id = req.cookies.userId;
+  const id = req.signedCookies.userId;
   
   if(!id) {
     res.render("auth/login");
@@ -23,6 +23,8 @@ module.exports.requireAuth = (req, res, next) => {
     });
     return;
   }
+  
+  res.locals.username = user.name;
   
   next();
 }

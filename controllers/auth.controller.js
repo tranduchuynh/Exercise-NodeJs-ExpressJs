@@ -46,6 +46,8 @@ module.exports.postLogin = async (req, res) => {
   
   wrongLoginCount = 0;
   
-  res.cookie("userId", user.id);
+  res.cookie("userId", user.id, {
+    signed: true
+  });
   res.redirect("/users")
 }

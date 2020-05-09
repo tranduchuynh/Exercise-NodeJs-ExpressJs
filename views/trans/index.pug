@@ -3,7 +3,7 @@ extends ../layout/common
 block content
   h1.text-center Transactions
   h3.text-center
-    a(href="/trans/create") New trans
+    a(href="/trans/create").badge.badge-primary  New trans
   form(action="/trans/search", method="GET").text-center
     input(name="q" type="text").form-control.w-50.mx-auto
     button.btn.btn-primary.mt-4 Search
@@ -14,18 +14,16 @@ block content
       tr
         th Infomation
         if(user.isAdmin)
-          th Options
+          th(colspan="3") Options
     tbody
       each tran in trans
         tr
           td=`${tran.formTrans[0]} has hired the book ${tran.formTrans[1]}`
           if(user.isAdmin)  
             td
-             span
               if(!tran.isComplete)
-                a(href="/trans/complete/" + tran.id) Not complete
+                a(href="/trans/complete/" + tran.id).badge.badge-primary Not complete
               else
-                span Completed
-              span  / 
-              span
-                a(href="/trans/delete/" + tran.id) Delete
+                a(href="#" + tran.id).badge.badge-success Complete
+            td
+              a(href="/trans/delete/" + tran.id).badge.badge-danger Delete

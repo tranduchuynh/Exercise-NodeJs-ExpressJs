@@ -21,6 +21,8 @@ html
             a.nav-link(href='/books') Books
           li.nav-item
             a.nav-link(href='/trans') Transactions
+        if username
+          p= username
 
     block content
     block script
