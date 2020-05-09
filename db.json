@@ -27,7 +27,7 @@
       "phone": "0989899999",
       "id": "x48x6hUTL",
       "email": "huynhpro@gmail.com",
-      "password": "4297f44b13955235245b2497399d7a93",
+      "password": "$2b$06$nw/6.74t8ONLJJ6d3r3Mlede8Wx7sldz2LnS35tgK.RBbGOdnfzAK",
       "isAdmin": true
     },
     {
@@ -35,7 +35,7 @@
       "phone": "0989898767",
       "id": "x48V9hUHA",
       "email": "hacute@gmail.com",
-      "password": "123123"
+      "password": "$2b$06$nw/6.74t8ONLJJ6d3r3Mlede8Wx7sldz2LnS35tgK.RBbGOdnfzAK"
     }
   ],
   "books": [
