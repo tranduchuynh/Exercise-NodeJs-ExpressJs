@@ -26,3 +26,19 @@ block content
               a(href="/users/edit/" + user.id).badge.badge-primary  Edit
           td
               a(href="/users/delete/" + user.id).badge.badge-danger Delete
+
+block pagination
+  if users.length >= perPage
+    nav(aria-label='Page navigation example')
+      ul.pagination.justify-content-center
+        li.page-item
+          a.page-link(href='/users?page=1', aria-label='Previous')
+            span(aria-hidden='true') &laquo;
+            span.sr-only Previous
+          each total, index in totalUsers
+            li.page-item(class= page - 1 === index ? 'active': '')
+              a.page-link(href=`/users?page=${index + 1}`)= index + 1  
+        li.page-item
+          a.page-link(href=`/users?page=${totalUsers.length}`, aria-label='Next')
+            span(aria-hidden='true') &raquo;
+            span.sr-only Next

@@ -4,10 +4,10 @@ const router = express.Router();
 const controllers = require("../controllers/users.controller");
 const validates = require("../validates/user.validate");
 
-router.get("/cookie", (req, res) => {
-  res.cookie("user-id", "12345");
-  res.send("Hello cookie");
-});
+// router.get("/cookie", (req, res) => {
+//   res.cookie("user-id", "12345");
+//   res.send("Hello cookie");
+// });
 
 router.get("/", controllers.index);
 

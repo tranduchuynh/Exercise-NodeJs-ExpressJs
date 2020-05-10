@@ -3,13 +3,25 @@ const db = require("../db");
 
 let count = 0;
 module.exports.index = (req, res) => {
-  if (req.cookies) {
-    count++;
-    console.log("cookie: " + count);
-  }
-
+  // if (req.cookies) {
+  //   count++;
+  //   console.log("cookie: " + count);
+  // }
+  const users = db.get("users").value();
+  const page = req.query.page || 1; // n
+  const perPage = 10 // x
+  
+  const start = (page - 1) * perPage;
+  const end = page * perPage
+  
+  const total = Math.round(users.length / perPage);
+  const totalUsers = users.slice(0, total);
+  
   res.render("users/index", {
-    users: db.get("users").value()
+    users: db.get("users").value().slice(start, end),
+    totalUsers,
+    perPage,
+    page
   });
 };
 
