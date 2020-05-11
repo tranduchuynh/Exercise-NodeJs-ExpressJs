@@ -4,20 +4,22 @@ block content
   h1.text-center Books App
   h3.text-center
     a(href="/users/create").badge.badge-primary  New User
-  form(action="/users/search", method="GET").text-center
+  form(action="/users/search", method="GET" enctype="multipart/form-data").text-center
     input(name="q" type="text").form-control.w-50.mx-auto
     button.btn.btn-primary.mt-4 Search
   table.table.table-dark.table-bordered.text-center.mx-auto(style="width: 50%")
     thead
       tr
-        th ID
+        th Avatar
         th Users
         th Phone
         th(colspan="3") Options
     tbody
       each user in users
         tr
-          td=user.id
+          td
+            a(href="/users/update/avatar/" + user.id)
+              img(src=user.avatar width="32" height="32").rounded-circle
           td=user.name
           td=user.phone
           td
@@ -28,7 +30,6 @@ block content
               a(href="/users/delete/" + user.id).badge.badge-danger Delete
 
 block pagination
-  if users.length >= perPage
     nav(aria-label='Page navigation example')
       ul.pagination.justify-content-center
         li.page-item

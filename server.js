@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
 
 
+
 app.get("/", (req, res) => {
   res.render("index");
 });

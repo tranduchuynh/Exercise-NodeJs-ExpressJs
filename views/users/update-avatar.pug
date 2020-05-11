@@ -1,0 +1,14 @@
+extends ../layout/common
+
+block content
+  p.text-center.mb-2 Avatar
+    img(src=user.avatar width="32").d-block.mx-auto
+  
+  form(action=`/users/update/avatar/${user.id}` method="POST" enctype="multipart/form-data").text-center
+    div
+      label(for="avatar") 
+      input(type="file", name="avatar").form-control-file.w-50.mx-auto
+    button(type="submit").btn.btn-primary.mt-3 Update
+      
+      
+    

@@ -30,18 +30,17 @@ block content
             td
               a(href="/trans/delete/" + tran.id).badge.badge-danger Delete
 block pagination
-  if trans.length >= perPage
-    nav(aria-label='Page navigation example')
-      ul.pagination.justify-content-center
-        li.page-item
-          a.page-link(href='/trans?page=1', aria-label='Previous')
-            span(aria-hidden='true') &laquo;
-            span.sr-only Previous
-          each total, index in totalTrans
-            li.page-item(class= page - 1 === index ? 'active' : '')
-              a.page-link(href=`/trans?page=${index + 1}`)= index + 1
-                span.sr-only (current)
-        li.page-item
-          a.page-link(href=`/trans?page=${totalTrans.length}`, aria-label='Next')
-            span(aria-hidden='true') &raquo;
-            span.sr-only Next
+  nav(aria-label='Page navigation example')
+    ul.pagination.justify-content-center
+      li.page-item
+        a.page-link(href='/trans?page=1', aria-label='Previous')
+          span(aria-hidden='true') &laquo;
+          span.sr-only Previous
+        each total, index in totalTrans
+          li.page-item(class= page - 1 === index ? 'active' : '')
+            a.page-link(href=`/trans?page=${index + 1}`)= index + 1
+              span.sr-only (current)
+      li.page-item
+        a.page-link(href=`/trans?page=${totalTrans.length}`, aria-label='Next')
+          span(aria-hidden='true') &raquo;
+          span.sr-only Next

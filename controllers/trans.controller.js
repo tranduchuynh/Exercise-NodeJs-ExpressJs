@@ -71,20 +71,32 @@ module.exports.complete = (req, res) => {
 module.exports.delete = (req, res) => {
   const id = req.params.id;
   const idCookie = req.signedCookies.userId;
+  const trans = db.get("trans").value();
+  
+  const page = req.query.page || 1; // n
+  const perPage = 5 // x
+  
+  let start = (page - 1) * perPage;
+  let end = page * perPage
+  
+  const total = Math.ceil(trans.length / perPage);
+  const totalTrans = trans.slice(0, total);
   
   if(!idCookie) {
     console.log("Not found user")
   }
   
   const user = db.get("users").find({ id: idCookie }).value();
-  console.log("userrrr", user)
   db.get("trans")
     .remove({ id })
     .write();
   
   res.render("trans/index", {
-    trans: db.get("trans").value(),
-    user
+    trans: db.get("trans").value().slice(start, end),
+    user,
+    totalTrans,
+    page,
+    perPage
   });
 };
 
