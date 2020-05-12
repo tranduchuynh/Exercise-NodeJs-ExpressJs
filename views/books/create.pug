@@ -2,12 +2,15 @@ extends ../layout/common
 
 block content
   h1.text-center Create Book
-  form(action="/books/create" method="POST").text-center
+  form(action="/books/create" method="POST" enctype="multipart/form-data").text-center
     div(style="margin-bottom: 10px")
       label(style="display: block") Title:
       input(name="title" type="text").form-control.w-50.mx-auto
     div(style="margin-bottom: 10px")
       label(style="display: block") Description:
       input(name="description" type="text").form-control.w-50.mx-auto
+    div(style="margin-bottom: 10px")
+      label(style="display: block") Cover:
+      input(name="cover" type="file").form-control-file.w-50.mx-auto
     div
       button.btn.btn-primary Create

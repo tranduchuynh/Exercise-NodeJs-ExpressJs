@@ -10,13 +10,14 @@ block content
   table.table.table-dark.table-bordered.text-center.mx-auto(style="width: 50%;")
     thead
       tr
-        th ID
+        th Cover
         th Books
         th(colspan="3") Options
     tbody
       each book in books
         tr
-          td=book.id
+          td
+            img(src=book.coverUrl width="32" height="32")
           td=book.title
           td
             a(href="/books/" + book.id).badge.badge-primary View
@@ -24,6 +25,21 @@ block content
             a(href="/books/" + book.id + "/edit").badge.badge-primary Edit
           td
             a(href="/books/" + book.id + "/delete").badge.badge-danger Delete
+            
+block pagination
+    nav(aria-label='Page navigation example')
+      ul.pagination.justify-content-center
+        li.page-item
+          a.page-link(href='/books?page=1', aria-label='Previous')
+            span(aria-hidden='true') &laquo;
+            span.sr-only Previous
+          each total, index in totalBooks
+            li.page-item(class= page - 1 === index ? 'active': '')
+              a.page-link(href=`/books?page=${index + 1}`)= index + 1  
+        li.page-item
+          a.page-link(href=`/books?page=${totalBooks.length}`, aria-label='Next')
+            span(aria-hidden='true') &raquo;
+            span.sr-only Next
               
               
           

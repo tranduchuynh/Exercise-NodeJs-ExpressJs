@@ -3,20 +3,31 @@ const db = require("../db");
 
 module.exports.index = (req, res) => {
   const id = req.signedCookies.userId;
-  const user = db.get("users").find({ id }).value();
+  const user = db
+    .get("users")
+    .find({ id })
+    .value();
+  
+  if(!user) {
+    res.redirect("auth/login");
+  }
   const trans = db.get("trans").value();
-  
+
   const page = req.query.page || 1; // n
-  const perPage = 5 // x
-  
+  const perPage = 5; // x
+
   let start = (page - 1) * perPage;
-  let end = page * perPage
-  
+  let end = page * perPage;
+
   const total = Math.ceil(trans.length / perPage);
   const totalTrans = trans.slice(0, total);
-  
+  console.log(trans);
+  console.log(totalTrans);
   res.render("trans/index", {
-    trans: db.get("trans").value().slice(start, end),
+    trans: db
+      .get("trans")
+      .value()
+      .slice(start, end),
     user,
     totalTrans,
     page,
@@ -25,9 +36,40 @@ module.exports.index = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
+  const id = req.signedCookies.userId;
+  const user = db
+    .get("users")
+    .find({ id })
+    .value();
+  const sessionId = req.signedCookies.sessionId;
+  if (!user) {
+    res.redirect("auth/login");
+    return;
+  }
+
+  if (user.isAdmin) {
+    res.render("trans/create", {
+      users: db.get("users").value(),
+      books: db.get("books").value(),
+      user
+    });
+    return;
+  }
+
+  const count = db
+    .get("sessions")
+    .find({ id: sessionId })
+    .value();
+  const books = Object.keys(count.cart).map(item => {
+    return db
+      .get("books")
+      .find({ id: item })
+      .value();
+  });
+  
   res.render("trans/create", {
-    users: db.get("users").value(),
-    books: db.get("books").value()
+    user,
+    books
   });
 };
 
@@ -55,14 +97,20 @@ module.exports.postCreate = (req, res) => {
 
 module.exports.complete = (req, res) => {
   const id = req.params.id;
-  const tran = db.get("trans").find({ id }).value();
-  
-  if(!tran){
+  const tran = db
+    .get("trans")
+    .find({ id })
+    .value();
+
+  if (!tran) {
     res.render("trans/index", {
       error: "Not found trans"
-    })
+    });
   }
-  db.get("trans").find({ id }).assign({ isComplete: true }).write();
+  db.get("trans")
+    .find({ id })
+    .assign({ isComplete: true })
+    .write();
   res.render("trans/index", {
     trans: db.get("trans").value()
   });
@@ -72,27 +120,33 @@ module.exports.delete = (req, res) => {
   const id = req.params.id;
   const idCookie = req.signedCookies.userId;
   const trans = db.get("trans").value();
-  
+
   const page = req.query.page || 1; // n
-  const perPage = 5 // x
-  
+  const perPage = 5; // x
+
   let start = (page - 1) * perPage;
-  let end = page * perPage
-  
+  let end = page * perPage;
+
   const total = Math.ceil(trans.length / perPage);
   const totalTrans = trans.slice(0, total);
-  
-  if(!idCookie) {
-    console.log("Not found user")
+
+  if (!idCookie) {
+    console.log("Not found user");
   }
-  
-  const user = db.get("users").find({ id: idCookie }).value();
+
+  const user = db
+    .get("users")
+    .find({ id: idCookie })
+    .value();
   db.get("trans")
     .remove({ id })
     .write();
-  
+
   res.render("trans/index", {
-    trans: db.get("trans").value().slice(start, end),
+    trans: db
+      .get("trans")
+      .value()
+      .slice(start, end),
     user,
     totalTrans,
     page,

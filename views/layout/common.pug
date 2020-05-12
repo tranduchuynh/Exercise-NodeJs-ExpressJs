@@ -21,10 +21,19 @@ html
             a.nav-link(href='/books') Books
           li.nav-item
             a.nav-link(href='/trans') Transactions
-        if username
-          p= username
+          li.nav-item
+            a.nav-link(href='/products') Products
+          li.nav-item
+            a.nav-link(href="/trans/create")
+              img(src='https://cdn.glitch.com/4ab1e734-3748-4dc8-bdb9-eb00249751c5%2Fcommerce-and-shopping%20(1).png?v=1589216758784')
+              if cart
+                span.text-white.ml-2(
+                style="position: relative; left: -18px; top: -6px; background-color: red; border-radius: 45%; padding: 2px;")=  cart
+          if username
+            span.nav-link.text-white= username
 
     block content
+    block products
     block pagination
       
     block script

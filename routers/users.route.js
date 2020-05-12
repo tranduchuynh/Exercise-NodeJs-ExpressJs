@@ -16,7 +16,7 @@ const upload = multer({ dest: './public/profile/avatar/' });
 
 router.get("/", controllers.index);
 
-router.get("/search", upload.single('avatar'), controllers.search);
+router.get("/search", controllers.search);
 
 router.get("/create", (req, res) => {
   res.render("users/create");

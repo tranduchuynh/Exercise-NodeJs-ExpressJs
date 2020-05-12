@@ -1,5 +1,5 @@
 const shortid = require("shortid");
-const cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary').v2;
 const db = require("../db");
 
 

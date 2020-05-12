@@ -17,6 +17,7 @@ module.exports.requireAuth = (req, res, next) => {
 
   if(!user.isAdmin) {
     const tran = db.get("trans").find({ userId: id }).value();
+    res.locals.username = user.name;
     res.render("trans", {
       trans: [ tran ],
       user

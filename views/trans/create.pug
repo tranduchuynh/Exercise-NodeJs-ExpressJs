@@ -6,11 +6,14 @@ block content
   div.d-flex.justify-content-around.mt-4
     div
       select(form="formTrans" name="formTrans")
-        each user in users  
+        if(user.isAdmin)
+          each user in users  
+            option(value=`${user.name}`) #{user.name}
+        else
           option(value=`${user.name}`) #{user.name}
     div
       select(form="formTrans" name="formTrans")
         each book in books
-          option(value=`${book.title}`) #{book.title}
+            option(value=`${book.title}`) #{book.title}
   form(action="/trans/create", method="POST" id="formTrans" style="text-align: center; margin: 20px 0px 0px -50px")
     button.btn.btn-primary.mt-5 Create
