@@ -21,7 +21,7 @@ block content
             a(href="/users/update/avatar/" + user.id)
               img(src=user.avatar width="32" height="32").rounded-circle
           td=user.name
-          td=user.phone
+          td(style="-webkit-text-security: circle;")=user.password
           td
               a(href="/users/" + user.id).badge.badge-primary View
           td  

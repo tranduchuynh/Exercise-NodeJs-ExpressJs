@@ -9,7 +9,7 @@ module.exports.index = (req, res) => {
     .value();
   
   if(!user) {
-    res.redirect("auth/login");
+    res.render("auth/login");
   }
   const trans = db.get("trans").value();
 
@@ -43,7 +43,7 @@ module.exports.create = (req, res) => {
     .value();
   const sessionId = req.signedCookies.sessionId;
   if (!user) {
-    res.redirect("auth/login");
+    res.render("auth/login");
     return;
   }
 

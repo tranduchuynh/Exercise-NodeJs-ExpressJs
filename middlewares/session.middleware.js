@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
       id: sessionId
     }).write();
   }
-  console.log(req.signedCookies.sessionId)
+  // console.log(req.signedCookies.sessionId)
   if(req.signedCookies.sessionId) {
     const sessionId = req.signedCookies.sessionId;
     const carts = db.get("sessions").find({ id: sessionId }).value();
