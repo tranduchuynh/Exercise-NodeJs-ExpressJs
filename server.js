@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const db = require("./db");
 
-
 const usersRouter = require("./routers/users.route");
 const transRouter = require("./routers/transactions.route");
 const booksRouter = require("./routers/books.route");
@@ -14,6 +13,8 @@ const authRouter = require("./routers/auth.route");
 const productsRouter = require("./routers/products.route");
 const cartRouter = require("./routers/cart.route");
 
+const apiLoginRoute = require("./api/routers/login.route");
+const apiProductRoute = require("./api/routers/products.route");
 
 const authMiddleware = require("./middlewares/auth.middleware");
 const sessionMiddleware = require("./middlewares/session.middleware");
@@ -27,6 +28,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(sessionMiddleware);
+
+app.use("/api/login", apiLoginRoute);
+app.use("/api/products", apiProductRoute);
 
 app.get("/", (req, res) => {
   res.render("books/products", {
