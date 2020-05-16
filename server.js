@@ -15,6 +15,8 @@ const cartRouter = require("./routers/cart.route");
 
 const apiLoginRoute = require("./api/routers/login.route");
 const apiProductRoute = require("./api/routers/products.route");
+const apiUserRoute = require("./api/routers/users.route");
+
 
 const authMiddleware = require("./middlewares/auth.middleware");
 const sessionMiddleware = require("./middlewares/session.middleware");
@@ -31,6 +33,8 @@ app.use(sessionMiddleware);
 
 app.use("/api/login", apiLoginRoute);
 app.use("/api/products", apiProductRoute);
+app.use("/api/users", apiUserRoute);
+
 
 app.get("/", (req, res) => {
   res.render("books/products", {

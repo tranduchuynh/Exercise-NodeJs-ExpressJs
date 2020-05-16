@@ -9,5 +9,5 @@ module.exports.create = async (req, res) => {
   const product = new Book(req.body);
   await product.save();
   
-  res.json(product)
+  res.json(product);
 }

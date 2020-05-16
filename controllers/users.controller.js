@@ -11,28 +11,36 @@ cloudinary.config({
 
 // console.log(process.env.CLOUDINARY_URL)
 let count = 0;
-module.exports.index = async (req, res) => {
+module.exports.index = async (req, res, next) => {
   // if (req.cookies) {
   //   count++;
   //   console.log("cookie: " + count);
   // }
   // const users = db.get("users").value();
-  const users = await User.find({});
-  const page = req.query.page || 1; // n
-  const perPage = 10; // x
+  try {
+    const users = await User.find({});
+    const page = req.query.page || 1; // n
+    const perPage = 10; // x
 
-  const start = (page - 1) * perPage;
-  const end = page * perPage;
+    const start = (page - 1) * perPage;
+    const end = page * perPage;
 
-  const total = Math.ceil(users.length / perPage);
-  const totalUsers = users.slice(0, total);
+    const total = Math.ceil(users.length / perPage);
+    const totalUsers = users.slice(0, total);
 
-  res.render("users/index", {
-    users: users.slice(start, end),
-    totalUsers,
-    perPage,
-    page
-  });
+    let a;
+    a.foo();
+
+    res.render("users/index", {
+      users: users.slice(start, end),
+      totalUsers,
+      perPage,
+      page
+    });
+  } catch (error) {
+    // next(error);
+    res.render("errors/error")
+  }
 };
 
 module.exports.search = async (req, res) => {
@@ -200,7 +208,6 @@ module.exports.postAvatar = async (req, res) => {
       { avatarUrl: req.body.avatarUrl },
       { returnNewDocument: true, new: true, strict: false }
     );
-    
   });
 
   // if (!id) {
